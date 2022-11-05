@@ -1,24 +1,24 @@
 # vue-todo-app
 
-## Project setup
-```
+## ローカルでのアプリの立ち上げ
+
+### 初回セットアップ
+
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+### サーバー起動
+
+```bash
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+を実行後、ブラウザで` http://localhost:8080/ `を開く。
+## 開発するとき
 
-### Lints and fixes files
-```
-npm run lint
-```
+### LintとFormat
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```bash
+npm run ci
+```
