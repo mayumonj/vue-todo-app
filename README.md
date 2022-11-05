@@ -15,6 +15,7 @@ npm run serve
 ```
 
 を実行後、ブラウザで` http://localhost:8080/ `を開く。
+
 ## 開発するとき
 
 ### LintとFormat
