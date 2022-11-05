@@ -5,15 +5,21 @@ export default {
   data() {
     return {
       newTodo: '',
-      todos: [
-        { id: id++, text: 'Learn HTML' , editing: false},
-        { id: id++, text: 'Learn JavaScript' , editing: false},
-        { id: id++, text: 'Learn Vue' , editing: false}
-      ],
-      flag: false
+      todos: []
     }
   },
   computed: {
+  },
+  mounted() {
+    if (localStorage.todos) {
+      this.todos = JSON.parse(localStorage.todos)
+    } else {
+      this.todos = [
+        { id: id++, text: 'Learn HTML' , editing: false},
+        { id: id++, text: 'Learn JavaScript' , editing: false},
+        { id: id++, text: 'Learn Vue' , editing: false}
+      ]
+    }
   },
   methods: {
     addTodo() {
@@ -22,6 +28,7 @@ export default {
         return
       }
       this.todos.push({ id: id++, text: this.newTodo, editing: false })
+      localStorage.setItem('todos', JSON.stringify(this.todos))
       this.newTodo = ''
     },
     editTodo(todo) {
@@ -37,9 +44,24 @@ export default {
           item.editing = false
         }
       })
+      localStorage.setItem('todos', JSON.stringify(this.todos))
     },
     removeTodo(todo) {
       this.todos = this.todos.filter((t) => t !== todo)
+      localStorage.setItem('todos', JSON.stringify(this.todos))
+    },
+    clearAllData(){
+      localStorage.clear()
+      this.todos = []
+    },
+    setSampleData(){
+      localStorage.clear()
+      this.todos = [
+        { id: id++, text: 'Learn HTML' , editing: false},
+        { id: id++, text: 'Learn JavaScript' , editing: false},
+        { id: id++, text: 'Learn Vue' , editing: false}
+      ]
+      localStorage.setItem('todos', JSON.stringify(this.todos))
     }
   }
 }
@@ -61,9 +83,13 @@ export default {
       <td v-else>{{ todo.text }}</td>
       <td v-if="todo.editing"><button @click="doneEdit(todo)">done</button></td>
       <td v-else><button @click="editTodo(todo)">edit</button></td>
-      <td><button @click="removeTodo(todo)">remove</button></td>
+      <td v-if="!todo.editing"><button @click="removeTodo(todo)">remove</button></td>
     </tr>
   </table>
+  <div class="dev">
+    <button @click="clearAllData()">Clear all data</button><br>
+    <button @click="setSampleData()">Set sample data</button>
+  </div>
 </template>
 
 <style>
@@ -75,5 +101,8 @@ table {
 }
 td {
   padding: 5px;
+}
+.dev {
+ margin-top: 100px
 }
 </style>
