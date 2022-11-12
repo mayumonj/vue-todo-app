@@ -31,18 +31,12 @@ export default {
       this.newTodo = "";
     },
     editTodo(todo) {
-      this.todos.forEach((item) => {
-        if (item.id === todo.id) {
-          item.editing = true;
-        }
-      });
+      const targetTodo = this.todos.find(item => item.id === todo.id);
+      targetTodo.editing = true;
     },
     doneEdit(todo) {
-      this.todos.forEach((item) => {
-        if (item.id === todo.id) {
-          item.editing = false;
-        }
-      });
+      const targetTodo = this.todos.find(item => item.id === todo.id);
+      targetTodo.editing = false;
       localStorage.setItem("todos", JSON.stringify(this.todos));
     },
     removeTodo(todo) {
