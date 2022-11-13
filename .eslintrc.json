@@ -9,8 +9,10 @@
         "plugin:vue/essential",
         "prettier"
     ],
+    "parser": "vue-eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 12,
+        "parser": "@babel/eslint-parser",
+        "ecmaVersion": "latest",
         "sourceType": "module"
     },
     "plugins": [
